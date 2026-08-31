@@ -1,4 +1,4 @@
-# IceCream64
+# Icecream64
 
 [![Release](https://img.shields.io/github/v/release/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=violet)](https://github.com/sl2365/Icecream64/releases/latest/download/Icecream64.rar)
 [![Release Date](https://img.shields.io/github/release-date/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=yellow)](https://github.com/sl2365/Icecream64/releases)
@@ -9,7 +9,7 @@
 [![Commits Since Release](https://img.shields.io/github/commits-since/sl2365/Icecream64/latest?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/Icecream64/activity)
 [![Last Commit](https://img.shields.io/github/last-commit/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/Icecream64/activity)
 
-IceCream64 is a modern 64-bit VST3 synthesizer for Windows, inspired by the original **IceCream** plug-in by **Cosmic Boy**.
+Icecream64 is a modern 64-bit VST3 synthesizer for Windows, inspired by the original **IceCream** plug-in by **Cosmic Boy**.
 
 This project preserves the playful character and hands-on workflow of the original while adding a resizable interface, light and dark themes, portable settings, and a number of refinements. It is a homage rather than an exact replica.
 
@@ -112,7 +112,7 @@ The versions and locations of CMake and JUCE are fixed in `- Build.bat`. Arrange
 
 ```text
 Project folder\
-  IceCream64\
+  Icecream64\
     - Build.bat
     source\
   _Tools\
@@ -140,7 +140,7 @@ The script configures an x64 Release build, compiles the VST3, embeds all 32 fac
 ## Credits
 
 - Original IceCream plug-in and concept: [Cosmic Boy](https://www.cosmicbren.com/audio-tools)
-- IceCream64 v2 64-bit VST3: **sl23**
+- Icecream64 v2 64-bit VST3: **sl23**
 - Project source and releases on [github](https://github.com/sl2365/Icecream64)
 
-IceCream64 is not an exact replica of the original plug-in. It is an independent homage created in appreciation of Cosmic Boy's original work. I loved the interface so much, I tried to create a modern version while keeping the originals aesthetics.
+Icecream64 is not an exact replica of the original plug-in. It is an independent homage created in appreciation of Cosmic Boy's original work. I loved the interface so much, I tried to create a modern version while keeping the originals aesthetics.
