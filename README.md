@@ -1,5 +1,14 @@
 # IceCream64
 
+[![Release](https://img.shields.io/github/v/release/sl2365/PolyHostInterface?style=for-the-badge-square&logo=github&logoColor=white&color=purple)](https://github.com/sl2365/PolyHostInterface/releases/latest/download/PolyHostInterface.rar)
+[![Release Date](https://img.shields.io/github/release-date/sl2365/PolyHostInterface?style=for-the-badge-square&logo=github&logoColor=white&color=yellow)](https://github.com/sl2365/PolyHostInterface/releases)
+
+[![Latest Asset Downloads](https://img.shields.io/github/downloads/sl2365/PolyHostInterface/latest/PolyHostInterface.rar?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-latest&displayAssetName=false&color=blue)](https://github.com/sl2365/PolyHostInterface/releases/latest)
+[![Total Downloads](https://img.shields.io/github/downloads/sl2365/PolyHostInterface/total?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-total&color=blue)](https://github.com/sl2365/PolyHostInterface/releases)
+
+[![Commits Since Release](https://img.shields.io/github/commits-since/sl2365/PolyHostInterface/latest?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/PolyHostInterface/activity)
+[![Last Commit](https://img.shields.io/github/last-commit/sl2365/PolyHostInterface?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/PolyHostInterface/activity)
+
 IceCream64 is a modern 64-bit VST3 synthesizer for Windows, inspired by the original **IceCream** plug-in by **Cosmic Boy**.
 
 This project preserves the playful character and hands-on workflow of the original while adding a resizable interface, light and dark themes, portable settings, and a number of refinements. It is a homage rather than an exact replica.
@@ -126,12 +135,12 @@ Project folder\
 
 The script configures an x64 Release build, compiles the VST3, embeds all 32 factory presets, validates the resulting Windows x64 binary, and writes the full build output to `Results.log`. Existing user files in `dist\Data` are preserved, and the script does not install the plug-in elsewhere.
 
-> **Note:** The build script closes `PolyHostInterface.exe` if it is running so the existing plug-in file is not locked during the build. I added this specifically because thats what I loaded Icecream.vst3 in for testing purposes. If you don't use PHI, it will just be ignored and compile as normal.
+> **Note:** The build script closes `PolyHostInterface.exe` if it is running so the existing plug-in file is not locked during the build. I added this specifically because thats what I loaded Icecream.vst3 in for testing purposes. If you don't use [PolyHostInterface](https://github.com/sl2365/PolyHostInterface), it will just be ignored and compile as normal.
 
 ## Credits
 
 - Original IceCream plug-in and concept: [Cosmic Boy](https://www.cosmicbren.com/audio-tools)
 - IceCream64 v2 64-bit VST3: **sl23**
-- Project source and releases: [github.com/sl2365/Icecream64](https://github.com/sl2365/Icecream64)
+- Project source and releases on [github](https://github.com/sl2365/Icecream64)
 
 IceCream64 is not an exact replica of the original plug-in. It is an independent homage created in appreciation of Cosmic Boy's original work. I loved the interface so much, I tried to create a modern version while keeping the originals aesthetics.
