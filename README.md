@@ -3,7 +3,7 @@
 [![Release](https://img.shields.io/github/v/release/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=violet)](https://github.com/sl2365/Icecream64/releases/latest/download/Icecream64.rar)
 [![Release Date](https://img.shields.io/github/release-date/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=yellow)](https://github.com/sl2365/Icecream64/releases)
 
-[![Latest Asset Downloads](https://img.shields.io/github/downloads/sl2365/Icecream64/latest/Icecream64.rar?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-latest&displayAssetName=false&color=blue)](https://github.com/sl2365/Icecream64/releases/latest)
+[![Latest Asset Downloads](https://img.shields.io/github/downloads/sl2365/Icecream64/latest/download/Icecream64.rar?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-latest&displayAssetName=false&color=blue)](https://github.com/sl2365/Icecream64/releases/latest)
 [![Total Downloads](https://img.shields.io/github/downloads/sl2365/Icecream64/total?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-total&color=blue)](https://github.com/sl2365/Icecream64/releases)
 
 [![Commits Since Release](https://img.shields.io/github/commits-since/sl2365/Icecream64/latest?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/Icecream64/activity)
