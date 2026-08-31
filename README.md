@@ -1,13 +1,13 @@
 # IceCream64
 
-[![Release](https://img.shields.io/github/v/release/sl2365/PolyHostInterface?style=for-the-badge-square&logo=github&logoColor=white&color=purple)](https://github.com/sl2365/PolyHostInterface/releases/latest/download/PolyHostInterface.rar)
-[![Release Date](https://img.shields.io/github/release-date/sl2365/PolyHostInterface?style=for-the-badge-square&logo=github&logoColor=white&color=yellow)](https://github.com/sl2365/PolyHostInterface/releases)
+[![Release](https://img.shields.io/github/v/release/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=purple)](https://github.com/sl2365/Icecream64/releases/latest/download/Icecream64.rar)
+[![Release Date](https://img.shields.io/github/release-date/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=yellow)](https://github.com/sl2365/Icecream64/releases)
 
-[![Latest Asset Downloads](https://img.shields.io/github/downloads/sl2365/PolyHostInterface/latest/PolyHostInterface.rar?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-latest&displayAssetName=false&color=blue)](https://github.com/sl2365/PolyHostInterface/releases/latest)
-[![Total Downloads](https://img.shields.io/github/downloads/sl2365/PolyHostInterface/total?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-total&color=blue)](https://github.com/sl2365/PolyHostInterface/releases)
+[![Latest Asset Downloads](https://img.shields.io/github/downloads/sl2365/Icecream64/latest/Icecream64.rar?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-latest&displayAssetName=false&color=blue)](https://github.com/sl2365/Icecream64/releases/latest)
+[![Total Downloads](https://img.shields.io/github/downloads/sl2365/Icecream64/total?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-total&color=blue)](https://github.com/sl2365/Icecream64/releases)
 
-[![Commits Since Release](https://img.shields.io/github/commits-since/sl2365/PolyHostInterface/latest?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/PolyHostInterface/activity)
-[![Last Commit](https://img.shields.io/github/last-commit/sl2365/PolyHostInterface?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/PolyHostInterface/activity)
+[![Commits Since Release](https://img.shields.io/github/commits-since/sl2365/Icecream64/latest?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/Icecream64/activity)
+[![Last Commit](https://img.shields.io/github/last-commit/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/Icecream64/activity)
 
 IceCream64 is a modern 64-bit VST3 synthesizer for Windows, inspired by the original **IceCream** plug-in by **Cosmic Boy**.
 
