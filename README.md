@@ -1,6 +1,6 @@
 # IceCream64
 
-[![Release](https://img.shields.io/github/v/release/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=purple)](https://github.com/sl2365/Icecream64/releases/latest/download/Icecream64.rar)
+[![Release](https://img.shields.io/github/v/release/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=violet)](https://github.com/sl2365/Icecream64/releases/latest/download/Icecream64.rar)
 [![Release Date](https://img.shields.io/github/release-date/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=yellow)](https://github.com/sl2365/Icecream64/releases)
 
 [![Latest Asset Downloads](https://img.shields.io/github/downloads/sl2365/Icecream64/latest/Icecream64.rar?style=for-the-badge-square&logo=github&logoColor=white&label=downloads-latest&displayAssetName=false&color=blue)](https://github.com/sl2365/Icecream64/releases/latest)
