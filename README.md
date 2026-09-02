@@ -13,6 +13,9 @@ Icecream64 is a modern 64-bit VST3 synthesizer for Windows, inspired by the orig
 
 This project preserves the playful character and hands-on workflow of the original while adding a resizable interface, light and dark themes, portable settings, and a number of refinements. It is a homage rather than an exact replica.
 
+![jpg Icecream64](Resources/Icecream-Light.jpg)
+![jpg Icecream64](Resources/Icecream-Dark.jpg)
+
 ## Features
 
 - Two oscillators with independent level and octave controls
