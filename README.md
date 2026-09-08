@@ -9,7 +9,7 @@
 [![Commits Since Release](https://img.shields.io/github/commits-since/sl2365/Icecream64/latest?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/Icecream64/activity)
 [![Last Commit](https://img.shields.io/github/last-commit/sl2365/Icecream64?style=for-the-badge-square&logo=github&logoColor=white&color=green)](https://github.com/sl2365/Icecream64/activity)
 
-Icecream64 is a modern 64-bit VST3 synthesizer for Windows, inspired by the original **IceCream** plug-in by **Cosmic Boy**.
+Icecream64 is a modern 64-bit VST3 synthesizer for Windows, inspired by the original **IceCream** plugin by **Cosmic Boy**.
 
 This project preserves the playful character and hands-on workflow of the original while adding a resizable interface, light and dark themes, portable settings, and a number of refinements. It is a homage rather than an exact replica.
 
@@ -38,8 +38,8 @@ This project preserves the playful character and hands-on workflow of the origin
 ## Installation
 
 1. Download or build `IceCream.vst3`.
-2. Place it in a writable VST3 folder scanned by your plug-in host.
-3. Rescan VST3 plug-ins in the host, then load **ICECREAM** as an instrument.
+2. Place it in a writable VST3 folder scanned by your plugin host.
+3. Rescan VST3 plugins in the host, then load **ICECREAM** as an instrument.
 
 A common system VST3 folder is:
 
@@ -47,7 +47,7 @@ A common system VST3 folder is:
 C:\Program Files\Common Files\VST3
 ```
 
-IceCream stores user data in a `Data` folder beside the plug-in. If the chosen VST3 folder is protected by Windows, saving presets, sequencer templates, or settings may require suitable write permission. You can instead use a writable custom VST3 folder configured in your host.
+IceCream stores user data in a `Data` folder beside the plugin. If the chosen VST3 folder is protected by Windows, saving presets, sequencer templates, or settings may require suitable write permission. You can instead use a writable custom VST3 folder configured in your host.
 
 ## Using IceCream
 
@@ -55,7 +55,7 @@ IceCream stores user data in a `Data` folder beside the plug-in. If the chosen V
 
 Use the arrow buttons in the **Patch** section, or scroll over the patch display, to move through presets one at a time. The **Menu** provides access to factory and user presets, Save, Save As, interface size, theme selection, and the About window.
 
-The 32 factory presets are embedded in the plug-in. User presets are stored as `.ini` files in `Data\Presets`.
+The 32 factory presets are embedded in the plugin. User presets are stored as `.ini` files in `Data\Presets`.
 
 ### Step sequencer
 
@@ -83,11 +83,11 @@ In Mono mode, releasing the newest note returns playback to an earlier key that 
 
 Open **Patch > Menu** to select **Classic Light** or **Modern Dark**, or to choose a size from 75% to 200%. The interface can also be resized with its drag handle.
 
-The selected theme and zoom size are restored from `Data\Settings.ini` the next time the plug-in opens.
+The selected theme and zoom size are restored from `Data\Settings.ini` the next time the plugin opens.
 
 ## Portable data
 
-IceCream keeps its writable files beside the plug-in:
+IceCream keeps its writable files beside the plugin:
 
 ```text
 IceCream.vst3
@@ -97,7 +97,7 @@ Data\
   Seq\
 ```
 
-Keep the `Data` folder with the plug-in when moving an existing installation if you want to preserve user presets, sequencer templates, and interface settings. Missing folders are created when required.
+Keep the `Data` folder with the plugin when moving an existing installation if you want to preserve user presets, sequencer templates, and interface settings. Missing folders are created when required.
 
 ## Building from source
 
@@ -134,16 +134,16 @@ Project folder\
 2. Put CMake 4.4.2 and JUCE 8.0.15 in the locations shown above.
 3. Double-click `- Build.bat` in the project root.
 4. Wait for all five checks to report `PASS`.
-5. Find the finished plug-in at `dist\IceCream.vst3`.
+5. Find the finished plugin at `dist\IceCream.vst3`.
 
-The script configures an x64 Release build, compiles the VST3, embeds all 32 factory presets, validates the resulting Windows x64 binary, and writes the full build output to `Results.log`. Existing user files in `dist\Data` are preserved, and the script does not install the plug-in elsewhere.
+The script configures an x64 Release build, compiles the VST3, embeds all 32 factory presets, validates the resulting Windows x64 binary, and writes the full build output to `Results.log`. Existing user files in `dist\Data` are preserved, and the script does not install the plugin elsewhere.
 
-> **Note:** The build script closes `PolyHostInterface.exe` if it is running so the existing plug-in file is not locked during the build. I added this specifically because thats what I loaded Icecream.vst3 in for testing purposes. If you don't use [PolyHostInterface](https://github.com/sl2365/PolyHostInterface), it will just be ignored and compile as normal.
+> **Note:** The build script closes `PolyHostInterface.exe` if it is running so the existing plugin file is not locked during the build. I added this specifically because thats what I loaded Icecream.vst3 in for testing purposes. If you don't use [PolyHostInterface](https://github.com/sl2365/PolyHostInterface), it will just be ignored and compile as normal.
 
 ## Credits
 
-- Original IceCream plug-in and concept: [Cosmic Boy](https://www.cosmicbren.com/audio-tools)
+- Original IceCream plugin and concept: [Cosmic Boy](https://www.cosmicbren.com/audio-tools)
 - Icecream64 v2 64-bit VST3: **sl23**
 - Project source and releases on [github](https://github.com/sl2365/Icecream64)
 
-Icecream64 is not an exact replica of the original plug-in. It is an independent homage created in appreciation of Cosmic Boy's original work. I loved the interface so much, I tried to create a modern version while keeping the originals aesthetics.
+Icecream64 is not an exact replica of the original plugin. It is an independent homage created in appreciation of Cosmic Boy's original work. I loved the interface so much, I tried to create a modern version while keeping the originals aesthetics.

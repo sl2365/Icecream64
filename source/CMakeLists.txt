@@ -13,8 +13,8 @@ add_subdirectory("${JUCE_DIR}" "${CMAKE_BINARY_DIR}/JUCE")
 
 juce_add_plugin(IceCream
     VERSION 1.25.0
-    COMPANY_NAME "SynthMaker"
-    BUNDLE_ID "com.synthmaker.icecream"
+    COMPANY_NAME "sl23"
+    BUNDLE_ID "com.sl23.icecream"
     IS_SYNTH TRUE
     NEEDS_MIDI_INPUT TRUE
     NEEDS_MIDI_OUTPUT FALSE
@@ -22,13 +22,12 @@ juce_add_plugin(IceCream
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
     COPY_PLUGIN_AFTER_BUILD FALSE
     VST3_AUTO_MANIFEST FALSE
-    PLUGIN_MANUFACTURER_CODE SyMk
+    PLUGIN_MANUFACTURER_CODE sl23
     FORMATS VST3
     VST3_CATEGORIES Instrument Synth
     PRODUCT_NAME "ICECREAM"
-    # Keep this last: its final '[' is significant to CMake list parsing.
-    # Original VST2 unique ID: 0x5536775B, text "U6w[".
-    PLUGIN_CODE "U6w[")
+    # Permanent sl23 plug-in identifier. Do not change after release.
+    PLUGIN_CODE IcCr)
 
 juce_generate_juce_header(IceCream)
 

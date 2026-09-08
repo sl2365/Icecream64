@@ -2659,7 +2659,21 @@ public:
             return;
         }
 
-        loadAdjacentPreset (wheel.deltaY > 0.0f ? -1 : 1);
+        const auto direction = wheel.deltaY > 0.0f ? -1 : 1;
+        const auto nowMs = juce::Time::getMillisecondCounterHiRes();
+
+        // Some Windows wheels report one physical notch as two immediate
+        // packets. Treat that pair as one preset movement while retaining
+        // normal rapid scrolling between distinct notches.
+        if (direction == lastPatchWheelDirection
+            && nowMs - lastPatchWheelTimeMs < 80.0)
+        {
+            return;
+        }
+
+        lastPatchWheelDirection = direction;
+        lastPatchWheelTimeMs = nowMs;
+        loadAdjacentPreset (direction);
     }
 
     void mouseMove (const juce::MouseEvent& event) override
@@ -3297,6 +3311,8 @@ private:
     int currentPresetIndex = -1;
     int currentFactoryPresetIndex = -1;
     juce::File currentUserPresetFile;
+    double lastPatchWheelTimeMs = -1000.0;
+    int lastPatchWheelDirection = 0;
     bool finishingNameEdit = false;
     bool modernDarkTheme = false;
 };
@@ -4112,7 +4128,7 @@ struct IceCreamAudioProcessorEditor::Content final : public juce::Component
             graphics.setImageResamplingQuality (
                 juce::Graphics::highResamplingQuality);
             const auto characterBounds = juce::Rectangle<float> {
-                590.0f, 3.0f, 81.0f, 83.0f
+                594.0f, 0.0f, 90.0f, 92.0f
             };
             character->drawWithin (graphics, characterBounds,
                                    juce::RectanglePlacement::centred, 1.0f);
