@@ -2509,9 +2509,11 @@ public:
           modernDarkTheme (initialModernDarkTheme)
     {
         currentPresetName = state.state.getProperty (
-            juce::Identifier { "presetName" }, "INITIAL").toString();
+            juce::Identifier { "presetName" }, "INIT").toString();
         if (currentPresetName.isEmpty())
-            currentPresetName = "INITIAL";
+            currentPresetName = "INIT";
+        else if (currentPresetName == "INITIAL")
+            currentPresetName = "INIT";
 
         const auto storedPresetFileName = state.state.getProperty (
             juce::Identifier { "presetFile" }).toString();
@@ -2594,7 +2596,12 @@ public:
         if (! nameEditor.isVisible())
         {
             graphics.setColour (juce::Colour (0xff283822));
-            graphics.setFont (juce::FontOptions { 12.5f });
+            const auto emphasisePreset = currentFactoryPresetIndex >= 0
+                                      || currentPresetName == "INIT";
+            graphics.setFont (juce::FontOptions {
+                12.5f,
+                emphasisePreset ? juce::Font::bold : juce::Font::plain
+            });
             graphics.drawFittedText (currentPresetName,
                                      display.reduced (7, 2),
                                      juce::Justification::centredLeft,
@@ -2605,7 +2612,7 @@ public:
         graphics.setColour (themedTextColour (*this, juce::Colour (0xff263522)));
 
         const auto totalPresetCount = static_cast<int> (
-            factoryPresetResources.size() + presetFiles.size());
+            factoryPresetResources.size() + presetFiles.size() + 1);
         juce::String positionText { "--/" + juce::String (totalPresetCount) };
         if (currentPresetIndex >= 0
             && currentPresetIndex < totalPresetCount)
@@ -2762,28 +2769,36 @@ private:
         }
         else
         {
-            for (std::size_t index = 0;
-                 index < factoryPresetResources.size(); ++index)
+            if (currentPresetName == "INIT")
             {
-                if (currentPresetName
-                    == factoryPresetResources[index].displayName)
-                {
-                    currentFactoryPresetIndex = static_cast<int> (index);
-                    currentPresetIndex = currentFactoryPresetIndex;
-                    break;
-                }
+                currentPresetIndex = static_cast<int> (
+                    factoryPresetResources.size() + presetFiles.size());
             }
-
-            for (std::size_t index = 0; index < presetFiles.size(); ++index)
+            else
             {
-                if (currentPresetIndex < 0
-                    && displayNameForFile (presetFiles[index])
-                           == currentPresetName)
+                for (std::size_t index = 0;
+                     index < factoryPresetResources.size(); ++index)
                 {
-                    currentUserPresetFile = presetFiles[index];
-                    currentPresetIndex = static_cast<int> (
-                        factoryPresetResources.size() + index);
-                    break;
+                    if (currentPresetName
+                        == factoryPresetResources[index].displayName)
+                    {
+                        currentFactoryPresetIndex = static_cast<int> (index);
+                        currentPresetIndex = currentFactoryPresetIndex;
+                        break;
+                    }
+                }
+
+                for (std::size_t index = 0; index < presetFiles.size(); ++index)
+                {
+                    if (currentPresetIndex < 0
+                        && displayNameForFile (presetFiles[index])
+                               == currentPresetName)
+                    {
+                        currentUserPresetFile = presetFiles[index];
+                        currentPresetIndex = static_cast<int> (
+                            factoryPresetResources.size() + index);
+                        break;
+                    }
                 }
             }
         }
@@ -2825,6 +2840,7 @@ private:
 
         menu.addSubMenu ("Factory", factoryMenu, true);
         menu.addSubMenu ("User", userMenu, ! presetFiles.empty());
+        menu.addItem (3, "INIT");
         menu.addSeparator();
         sizeMenu.addItem (100, "75%");
         sizeMenu.addItem (101, "100%");
@@ -2860,6 +2876,12 @@ private:
                 if (result == 2)
                 {
                     safeThis->savePresetAs();
+                    return;
+                }
+
+                if (result == 3)
+                {
+                    safeThis->loadInitialPreset();
                     return;
                 }
 
@@ -2961,7 +2983,7 @@ private:
     {
         refreshPresetFiles();
         const auto totalPresetCount = static_cast<int> (
-            factoryPresetResources.size() + presetFiles.size());
+            factoryPresetResources.size() + presetFiles.size() + 1);
         if (totalPresetCount == 0)
             return;
 
@@ -2973,15 +2995,21 @@ private:
                                   + totalPresetCount)
                                % totalPresetCount;
 
-        const auto factoryCount = static_cast<int> (factoryPresetResources.size());
+        const auto factoryCount = static_cast<int> (
+            factoryPresetResources.size());
+        const auto userCount = static_cast<int> (presetFiles.size());
         if (currentPresetIndex < factoryCount)
         {
             loadFactoryPreset (currentPresetIndex);
         }
-        else
+        else if (currentPresetIndex < factoryCount + userCount)
         {
             loadPresetFile (presetFiles[static_cast<std::size_t> (
                 currentPresetIndex - factoryCount)]);
+        }
+        else
+        {
+            loadInitialPreset();
         }
     }
 
@@ -3020,6 +3048,27 @@ private:
                             displayNameForFile (file),
                             -1,
                             file);
+    }
+
+    void loadInitialPreset()
+    {
+        for (auto* baseParameter : processor.getParameters())
+        {
+            auto* parameter = dynamic_cast<juce::RangedAudioParameter*> (
+                baseParameter);
+            if (parameter == nullptr)
+                continue;
+
+            parameter->beginChangeGesture();
+            parameter->setValueNotifyingHost (parameter->getDefaultValue());
+            parameter->endChangeGesture();
+        }
+
+        currentPresetName = "INIT";
+        currentFactoryPresetIndex = -1;
+        currentUserPresetFile = {};
+        storeCurrentPresetIdentity();
+        refreshPresetFiles();
     }
 
     void loadPresetContents (const juce::String& contents,
@@ -3307,7 +3356,7 @@ private:
     juce::TextEditor nameEditor;
     std::unique_ptr<juce::AlertWindow> aboutDialog;
     std::vector<juce::File> presetFiles;
-    juce::String currentPresetName { "INITIAL" };
+    juce::String currentPresetName { "INIT" };
     int currentPresetIndex = -1;
     int currentFactoryPresetIndex = -1;
     juce::File currentUserPresetFile;
