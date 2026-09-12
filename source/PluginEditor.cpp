@@ -895,6 +895,62 @@ public:
     }
 };
 
+juce::String guiLabelForParameter (const juce::String& parameterID,
+                                   const juce::RangedAudioParameter& parameter)
+{
+    struct GuiLabel
+    {
+        const char* id;
+        const char* text;
+    };
+
+    // These are deliberately independent of the AudioParameter names. The
+    // longer names identify controls unambiguously to a host, while the GUI
+    // retains the compact labels used by the original panel.
+    static constexpr GuiLabel labels[] {
+        { "p00_amp_attack", "A" },
+        { "p01_amp_decay", "D" },
+        { "p02_amp_release", "R" },
+        { "p03_amp_sustain", "S" },
+        { "p07_delay_mix", "MIX" },
+        { "p08_delay_on", "ON/OFF" },
+        { "p09_delay_time", "DELAY" },
+        { "p10_delay_feedback", "FEED" },
+        { "p11_filter_env_amount", "Amnt" },
+        { "p12_filter_env_attack", "A" },
+        { "p13_filter_env_decay", "D" },
+        { "p14_filter_env_release", "R" },
+        { "p15_filter_env_sustain", "S" },
+        { "p16_filter_cutoff", "CUTOFF" },
+        { "p17_filter_res", "RES" },
+        { "p18_filter_tracking", "TRACK" },
+        { "p20_glide_on", "GLIDE" },
+        { "p21_glide_rate", "RATE" },
+        { "p22_harmonix", "HARMONIX" },
+        { "p24_main_volume", "VOLUME" },
+        { "p25_monopoly", "POLY" },
+        { "p26_osc1_volume", "VOLUME" },
+        { "p27_osc2_volume", "VOLUME" },
+        { "p28_osc2_frequency", "FREQ" },
+        { "p29_osc1_octave", "OCTAVE" },
+        { "p30_osc2_octave", "OCTAVE" },
+        { "p31_osc2_osc1", "OSC1" },
+        { "p32_osc2_rate", "OSC2" },
+        { "p33_reverb_damp", "DAMP" },
+        { "p34_reverb_mix", "MIX" },
+        { "p35_reverb_on", "ON/OFF" },
+        { "p36_reverb_room", "ROOM" },
+        { "p37_reverb_width", "WIDTH" },
+        { "p44_character", "CHARACTER" }
+    };
+
+    for (const auto& label : labels)
+        if (parameterID == label.id)
+            return label.text;
+
+    return parameter.getName (64);
+}
+
 class ParameterControl final : public juce::Component
 {
 public:
@@ -924,12 +980,7 @@ public:
         if (parameter == nullptr)
             return;
 
-        if (parameterID == "p31_osc2_osc1")
-            name = "OSC1";
-        else if (parameterID == "p11_filter_env_amount")
-            name = "Amnt";
-        else
-            name = parameter->getName (64);
+        name = guiLabelForParameter (parameterID, *parameter);
 
         if (parameterID == "p19_filter_type")
         {
@@ -4182,6 +4233,12 @@ struct IceCreamAudioProcessorEditor::Content final : public juce::Component
             character->drawWithin (graphics, characterBounds,
                                    juce::RectanglePlacement::centred, 1.0f);
         }
+
+        graphics.setColour (modernDark ? juce::Colour (0xffd9dee3)
+                                       : juce::Colour (0xff526a49));
+        graphics.setFont (juce::FontOptions { 10.5f, juce::Font::bold });
+        graphics.drawText ("v2.135", 309, 71, 56, 16,
+                           juce::Justification::centredLeft, false);
     }
 
     void setModernDarkTheme (bool enabled)

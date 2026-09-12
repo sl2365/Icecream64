@@ -31,7 +31,7 @@ set "BUNDLE_BINARY=%BUILD_DIR%\IceCream_artefacts\Release\VST3\IceCream.vst3\Con
 set "FINAL_PLUGIN=%DIST_DIR%\IceCream.vst3"
 
 echo.
-echo IceCream 64-bit VST3 - Stage 40.78 Build
+echo IceCream 64-bit VST3 - Stage 40.86 Build
 echo ======================================
 echo.
 

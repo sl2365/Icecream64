@@ -113,6 +113,7 @@ private:
     void startVoice (int midiNote, float velocity);
     void releaseVoice (int midiNote);
     void beginRelease (Voice& voice);
+    void resetMidiPerformanceControls();
     void handleMidiMessage (const juce::MidiMessage& message);
     void renderRange (juce::AudioBuffer<float>& buffer, int startSample, int endSample);
     void processDelay (juce::AudioBuffer<float>& buffer);
@@ -208,6 +209,18 @@ private:
     std::array<int, 128> heldNoteOrder {};
     int heldNoteCount = 0;
     std::uint64_t nextVoiceAge = 1;
+
+    std::array<int, 16> registeredParameterMsb {};
+    std::array<int, 16> registeredParameterLsb {};
+    std::array<int, 16> pitchBendRangeCoarse {};
+    std::array<int, 16> pitchBendRangeFine {};
+    int activePitchBendChannel = 0;
+    float pitchBendPosition = 0.0f;
+    float targetPitchBendSemitones = 0.0f;
+    float smoothedPitchBendSemitones = 0.0f;
+    float targetModWheelAmount = 0.0f;
+    float smoothedModWheelAmount = 0.0f;
+    double modWheelPhase = 0.0;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (IceCreamAudioProcessor)
 };

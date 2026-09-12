@@ -201,75 +201,76 @@ struct OriginalParameterSpec
 // The IDs, automation flags and normal operating defaults below were read
 // directly from the original 32-bit VST2. During development, the two envelope
 // attacks default to minimum and the three volume controls default to maximum
-// so repeated build tests begin immediately at a useful level. Display names
-// are translated from SynthMaker's internal names to the labels printed on the
-// original panel. The index prefix keeps every VST3 parameter identity stable.
+// so repeated build tests begin immediately at a useful level. Host-facing
+// names include their section so automation and MIDI-mapping lists remain
+// unambiguous. The GUI keeps the shorter labels printed on the original panel.
+// The index prefix keeps every VST3 parameter identity stable.
 constexpr std::array<OriginalParameterSpec, 44> originalParameterSpecs {{
-    { "p00_amp_attack",          "A",                            0.000000f, false, true  },
-    { "p01_amp_decay",           "D",                            0.337500f, false, true  },
-    { "p02_amp_release",         "R",                            0.337500f, false, true  },
-    { "p03_amp_sustain",         "S",                            0.350000f, false, true  },
-    { "p04_crusher_osc1",        "OSC1",                         1.000000f, true,  true  },
-    { "p05_crusher_osc2",        "OSC2",                         1.000000f, true,  true  },
-    { "p06_bitrate",             "BITRATE",                      0.897211f, false, true  },
-    { "p07_delay_mix",           "MIX",                          0.112500f, false, true  },
-    { "p08_delay_on",            "ON/OFF",                       1.000000f, true,  true  },
-    { "p09_delay_time",          "DELAY",                        0.050000f, false, true  },
-    { "p10_delay_feedback",      "FEED",                         0.325000f, false, true  },
-    { "p11_filter_env_amount",   "Amount",                       0.000000f, false, true  },
-    { "p12_filter_env_attack",   "A",                            0.000000f, false, true  },
-    { "p13_filter_env_decay",    "D",                            0.437500f, false, true  },
-    { "p14_filter_env_release",  "R",                            0.412500f, false, true  },
-    { "p15_filter_env_sustain",  "S",                            0.000000f, false, true  },
-    { "p16_filter_cutoff",       "CUTOFF",                       0.843751f, false, true  },
-    { "p17_filter_res",          "RES",                          0.337500f, false, true  },
-    { "p18_filter_tracking",     "TRACK",                        0.000000f, false, true  },
-    { "p19_filter_type",         "TYPE",                         0.000000f, false, true  },
-    { "p20_glide_on",            "GLIDE",                        1.000000f, true,  true  },
-    { "p21_glide_rate",          "RATE",                         0.337500f, false, true  },
-    { "p22_harmonix",            "HARMONIX",                     0.000000f, true,  true  },
-    { "p23_knob",                "KNOB",                         1.000000f, false, true  },
-    { "p24_main_volume",         "VOLUME",                       1.000000f, false, true  },
-    { "p25_monopoly",            "POLY",                         1.000000f, true,  true  },
-    { "p26_osc1_volume",         "VOLUME",                       1.000000f, false, true  },
-    { "p27_osc2_volume",         "VOLUME",                       1.000000f, false, true  },
-    { "p28_osc2_frequency",      "FREQ",                         1.000000f, false, true  },
-    { "p29_osc1_octave",         "OCTAVE",                       0.333333f, false, true  },
-    { "p30_osc2_octave",         "OCTAVE",                       0.000000f, false, true  },
-    { "p31_osc2_osc1",           "OSC",                          0.337500f, false, true  },
-    { "p32_osc2_rate",           "OSC2",                         0.337500f, false, true  },
-    { "p33_reverb_damp",         "DAMP",                         0.050000f, false, true  },
-    { "p34_reverb_mix",          "MIX",                          0.050000f, false, true  },
-    { "p35_reverb_on",           "ON/OFF",                       1.000000f, true,  true  },
-    { "p36_reverb_room",         "ROOM",                         0.050000f, false, true  },
-    { "p37_reverb_width",        "WIDTH",                        0.050000f, false, true  },
-    { "p38_step_filter_on",      "FILTER",                       0.000000f, true,  true  },
-    { "p39_step_pitch_on",       "PITCH",                        1.000000f, true,  true  },
-    { "p40_step_smooth",         "SMOOTH",                       0.125000f, false, true  },
-    { "p41_step_rate",           "RATE",                         0.428571f, false, true  },
-    { "p42_pitch_waveform",      "PITCH WAVEFORM",               0.125000f, false, false },
-    { "p43_filter_waveform",     "FILTER WAVEFORM",              0.000000f, false, false }
+    { "p00_amp_attack",          "AMP ENV ATTACK",                0.000000f, false, true  },
+    { "p01_amp_decay",           "AMP ENV DECAY",                 0.337500f, false, true  },
+    { "p02_amp_release",         "AMP ENV RELEASE",               0.337500f, false, true  },
+    { "p03_amp_sustain",         "AMP ENV SUSTAIN",               0.350000f, false, true  },
+    { "p04_crusher_osc1",        "BITCRUSHER OSC1 ENABLE",        1.000000f, true,  true  },
+    { "p05_crusher_osc2",        "BITCRUSHER OSC2 ENABLE",        1.000000f, true,  true  },
+    { "p06_bitrate",             "BITCRUSHER AMOUNT",             0.897211f, false, true  },
+    { "p07_delay_mix",           "DELAY MIX",                     0.112500f, false, true  },
+    { "p08_delay_on",            "DELAY ENABLE",                  1.000000f, true,  true  },
+    { "p09_delay_time",          "DELAY TIME",                    0.050000f, false, true  },
+    { "p10_delay_feedback",      "DELAY FEEDBACK",                0.325000f, false, true  },
+    { "p11_filter_env_amount",   "FILTER ENV AMOUNT",             0.000000f, false, true  },
+    { "p12_filter_env_attack",   "FILTER ENV ATTACK",             0.000000f, false, true  },
+    { "p13_filter_env_decay",    "FILTER ENV DECAY",              0.437500f, false, true  },
+    { "p14_filter_env_release",  "FILTER ENV RELEASE",            0.412500f, false, true  },
+    { "p15_filter_env_sustain",  "FILTER ENV SUSTAIN",            0.000000f, false, true  },
+    { "p16_filter_cutoff",       "FILTER CUTOFF",                 0.843751f, false, true  },
+    { "p17_filter_res",          "FILTER RESONANCE",              0.337500f, false, true  },
+    { "p18_filter_tracking",     "FILTER TRACKING",               0.000000f, false, true  },
+    { "p19_filter_type",         "FILTER TYPE",                   0.000000f, false, true  },
+    { "p20_glide_on",            "CONTROL GLIDE ENABLE",          1.000000f, true,  true  },
+    { "p21_glide_rate",          "CONTROL GLIDE RATE",            0.337500f, false, true  },
+    { "p22_harmonix",            "CONTROL HARMONIX ENABLE",       0.000000f, true,  true  },
+    { "p23_knob",                "UNIDENTIFIED KNOB",             1.000000f, false, true  },
+    { "p24_main_volume",         "MASTER VOLUME",                 1.000000f, false, true  },
+    { "p25_monopoly",            "CONTROL POLY MODE",             1.000000f, true,  true  },
+    { "p26_osc1_volume",         "OSC1 VOLUME",                   1.000000f, false, true  },
+    { "p27_osc2_volume",         "OSC2 VOLUME",                   1.000000f, false, true  },
+    { "p28_osc2_frequency",      "OSC2 FINE TUNE",                1.000000f, false, true  },
+    { "p29_osc1_octave",         "OSC1 OCTAVE",                   0.333333f, false, true  },
+    { "p30_osc2_octave",         "OSC2 OCTAVE",                   0.000000f, false, true  },
+    { "p31_osc2_osc1",           "OSC1 WAVEFORM",                 0.337500f, false, true  },
+    { "p32_osc2_rate",           "OSC2 WAVEFORM",                 0.337500f, false, true  },
+    { "p33_reverb_damp",         "REVERB DAMPING",                0.050000f, false, true  },
+    { "p34_reverb_mix",          "REVERB MIX",                    0.050000f, false, true  },
+    { "p35_reverb_on",           "REVERB ENABLE",                 1.000000f, true,  true  },
+    { "p36_reverb_room",         "REVERB ROOM SIZE",              0.050000f, false, true  },
+    { "p37_reverb_width",        "REVERB WIDTH",                  0.050000f, false, true  },
+    { "p38_step_filter_on",      "SEQUENCER FILTER ENABLE",       0.000000f, true,  true  },
+    { "p39_step_pitch_on",       "SEQUENCER PITCH ENABLE",        1.000000f, true,  true  },
+    { "p40_step_smooth",         "SEQUENCER RELEASE SMOOTH",      0.125000f, false, true  },
+    { "p41_step_rate",           "SEQUENCER RATE",                0.428571f, false, true  },
+    { "p42_pitch_waveform",      "SEQUENCER PITCH WAVEFORM",      0.125000f, false, false },
+    { "p43_filter_waveform",     "SEQUENCER FILTER WAVEFORM",     0.000000f, false, false }
 }};
 
 // Modern extension. This remains outside the indexed original parameter table
 // so the original VST2 parameter identities and order stay unchanged.
 constexpr OriginalParameterSpec characterParameterSpec {
-    "p44_character", "CHARACTER", 0.000000f, false, true
+    "p44_character", "CONTROL CHARACTER", 0.000000f, false, true
 };
 
 constexpr OriginalParameterSpec sequencerSmoothAttackParameterSpec {
-    "p71_seq_smooth_attack", "SMOOTH ATTACK", 0.000000f, false, true
+    "p71_seq_smooth_attack", "SEQUENCER ATTACK SMOOTH", 0.000000f, false, true
 };
 
 constexpr std::array<OriginalParameterSpec, 8> equalizerParameterSpecs {{
-    { "p45_eq_125", "125 HZ",  0.000000f, false, true },
-    { "p46_eq_250", "250 HZ",  0.000000f, false, true },
-    { "p47_eq_500", "500 HZ",  0.000000f, false, true },
-    { "p48_eq_1k",  "1 KHZ",   0.000000f, false, true },
-    { "p49_eq_2k",  "2 KHZ",   0.000000f, false, true },
-    { "p50_eq_4k",  "4 KHZ",   0.000000f, false, true },
-    { "p51_eq_8k",  "8 KHZ",   0.000000f, false, true },
-    { "p52_eq_16k", "16 KHZ",  0.000000f, false, true }
+    { "p45_eq_125", "EQ 125 HZ",  0.000000f, false, true },
+    { "p46_eq_250", "EQ 250 HZ",  0.000000f, false, true },
+    { "p47_eq_500", "EQ 500 HZ",  0.000000f, false, true },
+    { "p48_eq_1k",  "EQ 1 KHZ",   0.000000f, false, true },
+    { "p49_eq_2k",  "EQ 2 KHZ",   0.000000f, false, true },
+    { "p50_eq_4k",  "EQ 4 KHZ",   0.000000f, false, true },
+    { "p51_eq_8k",  "EQ 8 KHZ",   0.000000f, false, true },
+    { "p52_eq_16k", "EQ 16 KHZ",  0.000000f, false, true }
 }};
 }
 
@@ -342,6 +343,7 @@ void IceCreamAudioProcessor::prepareToPlay (double sampleRate, int)
     reverbProcessor.setSampleRate (currentSampleRate);
     sequencerPhase = 0.0;
     sequencerActiveStep.store (0);
+    resetMidiPerformanceControls();
     resetVoices();
     resetEffects();
 }
@@ -349,6 +351,7 @@ void IceCreamAudioProcessor::prepareToPlay (double sampleRate, int)
 void IceCreamAudioProcessor::releaseResources()
 {
     keyboardState.reset();
+    resetMidiPerformanceControls();
     resetVoices();
     resetEffects();
 }
@@ -599,7 +602,7 @@ IceCreamAudioProcessor::createParameterLayout()
         {
             group->addChild (std::make_unique<juce::AudioParameterFloat> (
                 juce::ParameterID { sequencerStepParameterIDs[step], 1 },
-                "STEP " + juce::String (step + 1),
+                "SEQUENCER STEP " + juce::String (step + 1),
                 juce::NormalisableRange<float> { 0.0f, 1.0f },
                 0.5f,
                 stepAttributes));
@@ -607,7 +610,7 @@ IceCreamAudioProcessor::createParameterLayout()
 
         group->addChild (std::make_unique<juce::AudioParameterBool> (
             juce::ParameterID { "p70_seq_free", 1 },
-            "FREE",
+            "SEQUENCER FREE RUN",
             true));
 
         layout.add (std::move (group));
@@ -630,7 +633,7 @@ IceCreamAudioProcessor::createParameterLayout()
         group->addChild (makeParameter (originalParameterSpecs[5]));
         group->addChild (std::make_unique<juce::AudioParameterChoice> (
             juce::ParameterID { "p53_crusher_bits", 1 },
-            "BITS",
+            "BITCRUSHER BITS",
             juce::StringArray { "32 BIT", "24 BIT", "16 BIT", "8 BIT" },
             3));
 
@@ -966,8 +969,103 @@ void IceCreamAudioProcessor::beginRelease (Voice& voice)
     }
 }
 
+void IceCreamAudioProcessor::resetMidiPerformanceControls()
+{
+    registeredParameterMsb.fill (127);
+    registeredParameterLsb.fill (127);
+    pitchBendRangeCoarse.fill (2);
+    pitchBendRangeFine.fill (0);
+    activePitchBendChannel = 0;
+    pitchBendPosition = 0.0f;
+    targetPitchBendSemitones = 0.0f;
+    smoothedPitchBendSemitones = 0.0f;
+    targetModWheelAmount = 0.0f;
+    smoothedModWheelAmount = 0.0f;
+    modWheelPhase = 0.0;
+}
+
 void IceCreamAudioProcessor::handleMidiMessage (const juce::MidiMessage& message)
 {
+    if (message.isPitchWheel())
+    {
+        const auto channel = juce::jlimit (0, 15, message.getChannel() - 1);
+        const auto wheelValue = juce::jlimit (0, 16383, message.getPitchWheelValue());
+        pitchBendPosition = wheelValue >= 8192
+            ? static_cast<float> (wheelValue - 8192) / 8191.0f
+            : static_cast<float> (wheelValue - 8192) / 8192.0f;
+        activePitchBendChannel = channel;
+        const auto bendRange = static_cast<float> (
+            pitchBendRangeCoarse[static_cast<std::size_t> (channel)])
+            + 0.01f * static_cast<float> (
+                pitchBendRangeFine[static_cast<std::size_t> (channel)]);
+        targetPitchBendSemitones = pitchBendPosition * bendRange;
+        return;
+    }
+
+    if (message.isController())
+    {
+        const auto channel = juce::jlimit (0, 15, message.getChannel() - 1);
+        const auto channelIndex = static_cast<std::size_t> (channel);
+        const auto controller = message.getControllerNumber();
+        const auto value = juce::jlimit (0, 127, message.getControllerValue());
+
+        if (controller == 1)
+        {
+            targetModWheelAmount = static_cast<float> (value) / 127.0f;
+            return;
+        }
+
+        if (controller == 101)
+        {
+            registeredParameterMsb[channelIndex] = value;
+            return;
+        }
+
+        if (controller == 100)
+        {
+            registeredParameterLsb[channelIndex] = value;
+            return;
+        }
+
+        const auto pitchBendSensitivitySelected =
+            registeredParameterMsb[channelIndex] == 0
+            && registeredParameterLsb[channelIndex] == 0;
+        auto pitchBendRangeChanged = false;
+
+        if (pitchBendSensitivitySelected && controller == 6)
+        {
+            pitchBendRangeCoarse[channelIndex] = juce::jlimit (0, 96, value);
+            pitchBendRangeChanged = true;
+        }
+        else if (pitchBendSensitivitySelected && controller == 38)
+        {
+            pitchBendRangeFine[channelIndex] = juce::jlimit (0, 99, value);
+            pitchBendRangeChanged = true;
+        }
+        else if (controller == 121)
+        {
+            registeredParameterMsb[channelIndex] = 127;
+            registeredParameterLsb[channelIndex] = 127;
+            pitchBendPosition = 0.0f;
+            targetPitchBendSemitones = 0.0f;
+            targetModWheelAmount = 0.0f;
+            return;
+        }
+
+        if (pitchBendRangeChanged && channel == activePitchBendChannel)
+        {
+            const auto bendRange = static_cast<float> (pitchBendRangeCoarse[channelIndex])
+                                 + 0.01f * static_cast<float> (
+                                       pitchBendRangeFine[channelIndex]);
+            targetPitchBendSemitones = pitchBendPosition * bendRange;
+        }
+        if (pitchBendRangeChanged)
+            return;
+
+        // Other CC messages remain available for the existing host-side
+        // parameter mapping system and all-notes-off handling below.
+    }
+
     if (message.isNoteOn())
     {
         const auto noteNumber = juce::jlimit (0, 127, message.getNoteNumber());
@@ -1158,6 +1256,11 @@ void IceCreamAudioProcessor::renderRange (juce::AudioBuffer<float>& buffer,
         * sequencerBeatsPerStep[static_cast<std::size_t> (sequencerRateIndex)];
     const auto sequencerPhaseIncrement = 1.0
         / juce::jmax (1.0, secondsPerSequencerStep * currentSampleRate);
+    constexpr auto performanceControlSmoothingSeconds = 0.005;
+    constexpr auto modWheelVibratoRateHz = 5.5;
+    constexpr auto modWheelVibratoDepthSemitones = 1.0;
+    const auto performanceControlSmoothingAmount = 1.0
+        - std::exp (-1.0 / (performanceControlSmoothingSeconds * currentSampleRate));
     std::array<float, 16> sequencerStepValues {};
     for (std::size_t step = 0; step < sequencerStepValues.size(); ++step)
     {
@@ -1240,6 +1343,22 @@ void IceCreamAudioProcessor::renderRange (juce::AudioBuffer<float>& buffer,
     for (int sample = startSample; sample < endSample; ++sample)
     {
         float mixedSample = 0.0f;
+        smoothedPitchBendSemitones += static_cast<float> (
+            performanceControlSmoothingAmount
+            * (targetPitchBendSemitones - smoothedPitchBendSemitones));
+        smoothedModWheelAmount += static_cast<float> (
+            performanceControlSmoothingAmount
+            * (targetModWheelAmount - smoothedModWheelAmount));
+        const auto modWheelVibratoSemitones = modWheelVibratoDepthSemitones
+            * static_cast<double> (smoothedModWheelAmount)
+            * std::sin (juce::MathConstants<double>::twoPi * modWheelPhase);
+        const auto performancePitchOffsetSemitones =
+            static_cast<double> (smoothedPitchBendSemitones)
+            + modWheelVibratoSemitones;
+        const auto performancePitchRatio = std::pow (
+            2.0, performancePitchOffsetSemitones / 12.0);
+        modWheelPhase += modWheelVibratoRateHz / currentSampleRate;
+        modWheelPhase -= std::floor (modWheelPhase);
         const auto sequencerStepIndex = juce::jlimit (
             0, 15, static_cast<int> (std::floor (sequencerPhase)));
         const auto nextSequencerStepIndex = (sequencerStepIndex + 1) % 16;
@@ -1341,7 +1460,8 @@ void IceCreamAudioProcessor::renderRange (juce::AudioBuffer<float>& buffer,
 
             const auto basePhaseDelta = midiNoteToHertz (voice.currentMidiNote)
                                       / currentSampleRate
-                                      * sequencerPitchRatio;
+                                      * sequencerPitchRatio
+                                      * performancePitchRatio;
             const auto oscillator1BasePhaseDelta = basePhaseDelta * oscillator1PitchRatio;
             const auto oscillator2BasePhaseDelta = basePhaseDelta * oscillator2PitchRatio;
 
@@ -1387,7 +1507,8 @@ void IceCreamAudioProcessor::renderRange (juce::AudioBuffer<float>& buffer,
             // MIDI-note steps doubles cutoff from the original MIDI-zero base.
             voice.filterTrackingRatio = std::pow (
                 2.0,
-                voice.currentMidiNote * normalizedFilterTracking / 12.0);
+                (voice.currentMidiNote + performancePitchOffsetSemitones)
+                    * normalizedFilterTracking / 12.0);
 
             // Amount moves upward through the same broad normalized cutoff
             // range as the original CUTOFF control. At zero, the Stage 18
