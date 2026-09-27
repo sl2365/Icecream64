@@ -837,25 +837,34 @@ void IceCreamAudioProcessor::startVoice (int midiNote, float velocity)
     auto glideStartMidiNote = static_cast<double> (midiNote);
     auto* newestActiveVoice = static_cast<Voice*> (nullptr);
 
-    if (glideEnabled)
+    for (auto& voice : voices)
     {
-        for (auto& voice : voices)
+        if (voice.active
+            && (newestActiveVoice == nullptr || voice.age > newestActiveVoice->age))
         {
-            if (voice.active
-                && (newestActiveVoice == nullptr || voice.age > newestActiveVoice->age))
-            {
-                newestActiveVoice = &voice;
-            }
+            newestActiveVoice = &voice;
         }
-
-        if (newestActiveVoice != nullptr)
-            glideStartMidiNote = newestActiveVoice->currentMidiNote;
     }
+
+    if (glideEnabled && newestActiveVoice != nullptr)
+        glideStartMidiNote = newestActiveVoice->currentMidiNote;
 
     if (! isPolyphonic)
     {
-        // The original switch is illuminated for POLY. In its unlit state,
-        // a new note replaces the previous monophonic voice immediately.
+        // While another key remains held, continue the existing monophonic
+        // voice. Resetting it here used to cut a non-zero waveform at the MIDI
+        // event and caused a loud click on every legato note change.
+        if (heldNoteCount > 1 && newestActiveVoice != nullptr)
+        {
+            newestActiveVoice->note = midiNote;
+            newestActiveVoice->targetMidiNote = static_cast<double> (midiNote);
+            if (! glideEnabled)
+                newestActiveVoice->currentMidiNote = newestActiveVoice->targetMidiNote;
+            newestActiveVoice->age = nextVoiceAge++;
+            return;
+        }
+
+        // A genuinely new monophonic phrase still begins a fresh voice.
         for (auto& voice : voices)
             voice = {};
 
@@ -890,6 +899,13 @@ void IceCreamAudioProcessor::startVoice (int midiNote, float velocity)
     // 32, 48, 64, 80, 100 and 127.
     juce::ignoreUnused (velocity);
     selectedVoice->velocity = 1.0f;
+    constexpr auto overlappingNoteFadeSeconds = 0.002;
+    const auto useOverlappingNoteFade = isPolyphonic && heldNoteCount > 1;
+    selectedVoice->noteOnFade = useOverlappingNoteFade ? 0.0f : 1.0f;
+    selectedVoice->noteOnFadeStep = useOverlappingNoteFade
+        ? 1.0f / static_cast<float> (
+              juce::jmax (1.0, currentSampleRate * overlappingNoteFadeSeconds))
+        : 0.0f;
     selectedVoice->envelope = 0.0f;
     selectedVoice->releaseStep = 0.0f;
     selectedVoice->envelopeStage = EnvelopeStage::attack;
@@ -1587,7 +1603,13 @@ void IceCreamAudioProcessor::renderRange (juce::AudioBuffer<float>& buffer,
                                         + oscillator2Sample * oscillator2Gain;
             const auto filteredSample = processVoiceFilter (voice, oscillatorSample);
 
-            mixedSample += filteredSample * voice.envelope;
+            mixedSample += filteredSample * voice.envelope * voice.noteOnFade;
+
+            if (voice.noteOnFade < 1.0f)
+            {
+                voice.noteOnFade = juce::jmin (
+                    1.0f, voice.noteOnFade + voice.noteOnFadeStep);
+            }
 
             voice.phase += voice.phaseDelta;
             voice.phase -= std::floor (voice.phase);

@@ -69,6 +69,8 @@ private:
         int note = -1;
         bool active = false;
         float velocity = 0.0f;
+        float noteOnFade = 1.0f;
+        float noteOnFadeStep = 0.0f;
         float envelope = 0.0f;
         float releaseStep = 0.0f;
         EnvelopeStage envelopeStage = EnvelopeStage::attack;
