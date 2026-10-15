@@ -26,12 +26,12 @@ set "DIST_DIR=%PROJECT_ROOT%dist"
 set "PRESET_SOURCE_DIR=%SOURCE_DIR%\Data\Presets"
 set "PRESET_DEST_DIR=%DIST_DIR%\Data\Presets"
 set "CMAKE_EXE=%PROJECT_ROOT%..\_Tools\cmake\_4.4.2\bin\cmake.exe"
-set "JUCE_CMAKE=%PROJECT_ROOT%..\_Tools\JUCE\_8.0.15\CMakeLists.txt"
+set "JUCE_CMAKE=%PROJECT_ROOT%..\_Tools\JUCE\_9.0.4\CMakeLists.txt"
 set "BUNDLE_BINARY=%BUILD_DIR%\IceCream_artefacts\Release\VST3\IceCream.vst3\Contents\x86_64-win\IceCream.vst3"
 set "FINAL_PLUGIN=%DIST_DIR%\IceCream.vst3"
 
 echo.
-echo IceCream 64-bit VST3 - Stage 40.88 Build
+echo IceCream 64-bit VST3 - Stage 40.89 Build
 echo ======================================
 echo.
 
@@ -61,6 +61,15 @@ if not "%PRESET_COUNT%"=="32" goto :missing_presets
 echo       PASS
 echo.
 echo [2/5] Configuring Visual Studio Community 2026 x64...
+
+if exist "%BUILD_DIR%\CMakeCache.txt" (
+    findstr.exe /I /C:"_Tools/JUCE/_8.0.15" "%BUILD_DIR%\CMakeCache.txt" >nul 2>nul
+    if not errorlevel 1 (
+        echo       Removing the old JUCE 8 build cache...
+        rmdir /s /q "%BUILD_DIR%"
+        if exist "%BUILD_DIR%" goto :cache_cleanup_failed
+    )
+)
 
 "%CMAKE_EXE%" -S "%SOURCE_DIR%" -B "%BUILD_DIR%" -G "Visual Studio 18 2026" -A x64
 if errorlevel 1 goto :configure_failed
@@ -147,7 +156,7 @@ goto :failed
 :missing_juce
 echo.
 echo BUILD FAILED
-echo   - FAIL: JUCE 8.0.15 was not found
+echo   - FAIL: JUCE 9.0.4 was not found
 echo.
 echo Expected:
 echo   %JUCE_CMAKE%
@@ -179,6 +188,13 @@ echo.
 echo BUILD FAILED
 echo   - PASS: Required tools and source files found
 echo   - FAIL: CMake could not configure Visual Studio Community 2026 x64
+goto :failed
+
+:cache_cleanup_failed
+echo.
+echo BUILD FAILED
+echo   - PASS: Required tools and source files found
+echo   - FAIL: The old JUCE 8 build cache could not be removed
 goto :failed
 
 :build_failed

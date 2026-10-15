@@ -108,7 +108,7 @@ The included build script currently targets **Windows x64** and expects:
 - Windows 10 or later
 - Visual Studio Community 2026 with the **Desktop development with C++** workload
 - CMake 4.4.2
-- JUCE 8.0.15
+- JUCE 9.0.4
 - Windows PowerShell
 
 The versions and locations of CMake and JUCE are fixed in `- Build.bat`. Arrange the folders like this:
@@ -124,14 +124,14 @@ Project folder\
         bin\
           cmake.exe
     JUCE\
-      _8.0.15\
+      _9.0.4\
         CMakeLists.txt
 ```
 
 ### Build steps
 
 1. Install Visual Studio Community 2026 and its C++ desktop workload.
-2. Put CMake 4.4.2 and JUCE 8.0.15 in the locations shown above.
+2. Put CMake 4.4.2 and JUCE 9.0.4 in the locations shown above.
 3. Double-click `- Build.bat` in the project root.
 4. Wait for all five checks to report `PASS`.
 5. Find the finished plugin at `dist\IceCream.vst3`.

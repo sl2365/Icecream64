@@ -1,18 +1,18 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(IceCream VERSION 2.135 LANGUAGES C CXX)
+project(IceCream VERSION 2.136 LANGUAGES C CXX)
 
-set(JUCE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../_Tools/JUCE/_8.0.15")
+set(JUCE_DIR "${CMAKE_CURRENT_LIST_DIR}/../../_Tools/JUCE/_9.0.4")
 
 if(NOT EXISTS "${JUCE_DIR}/CMakeLists.txt")
     message(FATAL_ERROR
-        "JUCE 8.0.15 was not found. Expected: ${JUCE_DIR}/CMakeLists.txt")
+        "JUCE 9.0.4 was not found. Expected: ${JUCE_DIR}/CMakeLists.txt")
 endif()
 
 add_subdirectory("${JUCE_DIR}" "${CMAKE_BINARY_DIR}/JUCE")
 
 juce_add_plugin(IceCream
-    VERSION 2.135
+    VERSION 2.136
     COMPANY_NAME "sl23"
     BUNDLE_ID "com.sl23.icecream"
     IS_SYNTH TRUE

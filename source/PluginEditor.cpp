@@ -3117,7 +3117,7 @@ private:
 
         currentPresetName = "INIT";
         currentFactoryPresetIndex = -1;
-        currentUserPresetFile = {};
+        currentUserPresetFile = juce::File();
         storeCurrentPresetIdentity();
         refreshPresetFiles();
     }
@@ -4237,7 +4237,7 @@ struct IceCreamAudioProcessorEditor::Content final : public juce::Component
         graphics.setColour (modernDark ? juce::Colour (0xffd9dee3)
                                        : juce::Colour (0xff526a49));
         graphics.setFont (juce::FontOptions { 10.5f, juce::Font::bold });
-        graphics.drawText ("v2.135", 309, 71, 56, 16,
+        graphics.drawText ("v2.136", 309, 71, 56, 16,
                            juce::Justification::centredLeft, false);
     }
 
