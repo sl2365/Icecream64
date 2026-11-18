@@ -37,7 +37,7 @@ constexpr float controlLabelFontSize = 8.0f;
 constexpr float parameterLabelFontSize = 9.5f;
 constexpr float sectionBorderThickness = 2.2f;
 
-juce::File getPortableSequencerDirectory()
+juce::File getPortablePluginDirectory()
 {
 #if JUCE_WINDOWS
     static int moduleAnchor = 0;
@@ -56,17 +56,30 @@ juce::File getPortableSequencerDirectory()
         if (length > 0 && length < modulePath.size())
         {
             return juce::File (juce::String (modulePath.data()))
-                .getParentDirectory()
-                .getChildFile ("Data")
-                .getChildFile ("Seq");
+                .getParentDirectory();
         }
     }
 #endif
 
     return juce::File::getSpecialLocation (juce::File::currentApplicationFile)
-        .getParentDirectory()
-        .getChildFile ("Data")
-        .getChildFile ("Seq");
+        .getParentDirectory();
+}
+
+juce::File getPortableDataDirectory()
+{
+    const auto pluginDirectory = getPortablePluginDirectory();
+    const auto legacyDirectory = pluginDirectory.getChildFile ("Data");
+    const auto dataDirectory = pluginDirectory.getChildFile ("Icecream_Data");
+
+    if (legacyDirectory.isDirectory())
+        legacyDirectory.moveFileTo (dataDirectory);
+
+    return dataDirectory;
+}
+
+juce::File getPortableSequencerDirectory()
+{
+    return getPortableDataDirectory().getChildFile ("Seq");
 }
 
 juce::File getPortablePresetDirectory()
@@ -1501,7 +1514,8 @@ public:
         }
 
         templateButton.setTooltip ("Load a built-in or saved sequencer template");
-        saveButton.setTooltip ("Save the complete sequencer setup to Data\\Seq");
+        saveButton.setTooltip (
+            "Save the complete sequencer setup to Icecream_Data\\Seq");
         templateButton.onClick = [this] { showTemplateMenu(); };
         saveButton.onClick = [this] { showSaveDialog(); };
         addAndMakeVisible (templateButton);
@@ -4237,7 +4251,7 @@ struct IceCreamAudioProcessorEditor::Content final : public juce::Component
         graphics.setColour (modernDark ? juce::Colour (0xffd9dee3)
                                        : juce::Colour (0xff526a49));
         graphics.setFont (juce::FontOptions { 10.5f, juce::Font::bold });
-        graphics.drawText ("v2.136", 309, 71, 56, 16,
+        graphics.drawText ("v2.137", 309, 71, 56, 16,
                            juce::Justification::centredLeft, false);
     }
 

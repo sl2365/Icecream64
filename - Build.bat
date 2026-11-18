@@ -24,14 +24,14 @@ set "SOURCE_DIR=%PROJECT_ROOT%source"
 set "BUILD_DIR=%PROJECT_ROOT%build"
 set "DIST_DIR=%PROJECT_ROOT%dist"
 set "PRESET_SOURCE_DIR=%SOURCE_DIR%\Data\Presets"
-set "PRESET_DEST_DIR=%DIST_DIR%\Data\Presets"
+set "PRESET_DEST_DIR=%DIST_DIR%\Icecream_Data\Presets"
 set "CMAKE_EXE=%PROJECT_ROOT%..\_Tools\cmake\_4.4.2\bin\cmake.exe"
 set "JUCE_CMAKE=%PROJECT_ROOT%..\_Tools\JUCE\_9.0.4\CMakeLists.txt"
 set "BUNDLE_BINARY=%BUILD_DIR%\IceCream_artefacts\Release\VST3\IceCream.vst3\Contents\x86_64-win\IceCream.vst3"
-set "FINAL_PLUGIN=%DIST_DIR%\IceCream.vst3"
+set "FINAL_PLUGIN=%DIST_DIR%\Icecream.vst3"
 
 echo.
-echo IceCream 64-bit VST3 - Stage 40.89 Build
+echo IceCream 64-bit VST3 - Stage 40.90 Build
 echo ======================================
 echo.
 
@@ -121,7 +121,10 @@ if errorlevel 1 goto :wrong_architecture
 
 powershell.exe -NoProfile -Command ^
   "$extra = Get-ChildItem -LiteralPath '%DIST_DIR%' -Force | Where-Object {" ^
-  "  $_.Name -ne 'IceCream.vst3' -and -not ($_.Name -eq 'Data' -and $_.PSIsContainer)" ^
+  "  $_.Name -ne 'Icecream.vst3'" ^
+  "  -and $_.Name -ne 'Icecream64.rar'" ^
+  "  -and -not ($_.Name -eq 'Icecream_Data' -and $_.PSIsContainer)" ^
+  "  -and -not ($_.Name -eq 'Data' -and $_.PSIsContainer)" ^
   "};" ^
   "if ($extra) { $extra | ForEach-Object { Write-Host ('Unexpected: ' + $_.FullName) }; exit 1 }"
 if errorlevel 1 goto :unexpected_dist_files
@@ -139,7 +142,7 @@ echo.
 echo Output:
 echo   %FINAL_PLUGIN%
 echo.
-echo Existing user files in the portable Data folder were preserved.
+echo Existing user files in the portable Icecream_Data folder were preserved.
 echo No plug-in files were installed elsewhere.
 echo.
 exit /b 0
@@ -223,19 +226,19 @@ goto :failed
 :copy_failed
 echo.
 echo BUILD FAILED
-echo   - FAIL: IceCream.vst3 could not be copied into dist
+echo   - FAIL: Icecream.vst3 could not be copied into dist
 goto :failed
 
 :preset_migration_failed
 echo.
 echo BUILD FAILED
-echo   - FAIL: Old external factory files could not be removed from dist\Data\Presets
+echo   - FAIL: Old external factory files could not be removed from dist\Icecream_Data\Presets
 goto :failed
 
 :wrong_architecture
 echo.
 echo BUILD FAILED
-echo   - FAIL: dist\IceCream.vst3 is not a Windows x64 PE binary
+echo   - FAIL: dist\Icecream.vst3 is not a Windows x64 PE binary
 goto :failed
 
 :unexpected_dist_files
@@ -244,8 +247,10 @@ echo BUILD FAILED
 echo   - FAIL: dist contains an unexpected file or folder
 echo.
 echo Allowed:
-echo   IceCream.vst3
-echo   Data  ^(optional existing runtime folder^)
+echo   Icecream.vst3
+echo   Icecream64.rar  ^(optional archive^)
+echo   Icecream_Data  ^(optional runtime folder^)
+echo   Data  ^(optional legacy folder, renamed by the plug-in^)
 goto :failed
 
 :failed
